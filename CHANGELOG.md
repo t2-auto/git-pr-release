@@ -1,5 +1,31 @@
 # git-pr-release
 
+## v2.5.0 (2025-12-16)
+
+[full changelog](https://github.com/x-motemen/git-pr-release/compare/v2.4.0...v2.5.0)
+
+* (#116) Make it backward compatible for Ruby 3.0 (@moznion)
+
+## v2.4.0 (2025-12-16)
+
+[full changelog](https://github.com/x-motemen/git-pr-release/compare/v2.3.0...v2.4.0)
+
+* (#112) Add release workflow using trusted publishing (@ohbarye)
+* (#110) Support `pr-release.assign-pr-author` and `pr-release.request-pr-author-review` options (@moznion)
+
+## v2.3.0 (2025-12-15)
+
+[full changelog](https://github.com/x-motemen/git-pr-release/compare/v2.2.0...v2.3.0)
+
+* (#108) Support multiple PR assignees (@toshimaru)
+* (#107) Update CI matrix (@onk)
+* (#106) Use setup-ruby instead of container-based setup (@onk)
+* (#100) Allow big bang release PR (@secobaka)
+* (#95) Bump actions/cache from v2 to v4 (@ytkg)
+* (#94) Bump actions/checkout from v2 to v4 (@ytkg)
+* (#91) Test against Ruby v3.1 and Ruby v3.2 (@toshimaru)
+* (#90) updated docs to include --squashed flag (@petercorrea)
+
 ## v2.2.0 (2022-08-17)
 
 [full changelog](https://github.com/x-motemen/git-pr-release/compare/v2.1.2...v2.2.0)
