@@ -110,6 +110,35 @@ RSpec.describe Git::Pr::Release do
         MARKDOWN
       }
     end
+
+    context "when checklist lines are replaced with different PR numbers" do
+      it "does not drop the new PR line" do
+        actual = merge_pr_body(<<~OLD_BODY, <<~NEW_BODY)
+          - [ ] #10 Old PR line
+        OLD_BODY
+          - [ ] #11 New PR line
+        NEW_BODY
+
+        expect(actual).to eq <<~MARKDOWN.chomp
+          - [ ] #10 Old PR line
+          - [ ] #11 New PR line
+        MARKDOWN
+      end
+    end
+
+    context "when checklist lines are replaced for the same PR number" do
+      it "keeps the old line (to preserve manual edits)" do
+        actual = merge_pr_body(<<~OLD_BODY, <<~NEW_BODY)
+          - [ ] #10 Old PR line (manually edited)
+        OLD_BODY
+          - [ ] #10 New PR line (from template)
+        NEW_BODY
+
+        expect(actual).to eq <<~MARKDOWN.chomp
+          - [ ] #10 Old PR line (manually edited)
+        MARKDOWN
+      end
+    end
   end
 
   describe "#host_and_repository_and_scheme" do

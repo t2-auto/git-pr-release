@@ -139,8 +139,20 @@ ERB
               pr_body_lines << old_line
             when '!'
               if [ old_line, new_line ].all? { |line| /^- \[ \]/ === line }
-                say "Found checklist diff; use old one: #{old_line}", :trace
-                pr_body_lines << old_line
+                old_issue_number = old_line[/^- \[ \] \#(\d+)\b/, 1]
+                new_issue_number = new_line[/^- \[ \] \#(\d+)\b/, 1]
+
+                if old_issue_number && new_issue_number && old_issue_number == new_issue_number
+                  say "Found checklist diff for same issue ##{old_issue_number}; use old one: #{old_line}", :trace
+                  pr_body_lines << old_line
+                else
+                  # not a checklist diff for the same issue, use both line
+                  say "Use line as is: #{old_line}", :trace
+                  pr_body_lines << old_line
+
+                  say "Use line as is: #{new_line}", :trace
+                  pr_body_lines << new_line
+                end
               else
                 # not a checklist diff, use both line
                 say "Use line as is: #{old_line}", :trace
